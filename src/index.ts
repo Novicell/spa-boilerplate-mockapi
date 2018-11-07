@@ -6,12 +6,28 @@ import * as cors from 'cors';
 import contentController from './controllers/content.controller';
 import { Router } from 'express';
 
-const host = 'localhost';
-const port = '7070';
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+const host = process.env.HOST || 'localhost';
+const port = process.env.PORT || '7070';
 const app = express();
 const routes = Router();
 
-app.use(cors());
+const whitelist = ['http://127.0.0.1:3000']; // Add the routes that you want to whitelist
+const corsOptions = {
+  credentials: true,
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 routes.get('/getcontentbykey/*', contentController);
