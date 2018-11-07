@@ -41,6 +41,10 @@ export default function (req: Request, res: Response): void {
       content: {
         name: 'Test',
       },
+      meta: {
+        template: 'HomePage',
+        nodeId: 1337,
+      },
       seo: {
         title: 'Test-site',
         keywords: 'boilerplate, test'
