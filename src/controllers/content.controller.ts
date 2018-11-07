@@ -15,6 +15,29 @@ export default function (req: Request, res: Response): void {
 
   const data: ContentMetaModel = {
     viewModel: {
+      globals: {
+        header: {
+          logo: {
+            url: 'https://www.novicell.dk/dist/images/novicell-logo-white-web.svg'
+          },
+          navigation: [{
+            title: 'Menu 1',
+            path: '/menu-1/'
+          }, {
+            title: 'Menu 2',
+            path: '/menu-2/'
+          }],
+        },
+        footer: {
+          navigation: [{
+            title: 'Footer 1',
+            path: '/footer-1/'
+          }, {
+            title: 'Footer 2',
+            path: '/footer-2/'
+          }]
+        }
+      }, 
       content: {
         name: 'Test',
       },
